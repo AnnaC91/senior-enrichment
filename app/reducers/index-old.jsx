@@ -8,4 +8,4 @@ const rootReducer = function(state = initialState, action) {
   }
 };
 
-export default rootReducer
+// export default rootReducer - to prevent problems
