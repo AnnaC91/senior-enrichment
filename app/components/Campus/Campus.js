@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+//Campus component
 function Campus(props){
     console.log('campus props: ',props)
     return(
@@ -27,6 +28,7 @@ function Campus(props){
     )
 }
 
+//Mapping state to props
 const mapState = function (state, ownProps) {
     const campusId = ownProps.match.params.campusId
     console.log('checking students access from campus :',state.students)

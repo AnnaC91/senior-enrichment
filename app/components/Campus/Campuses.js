@@ -4,12 +4,11 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router'; //^*
 
-//import store from '../store/index';
-
+//All campuses component
 function Campuses(props) {
     return (
         <div>
-            
+            <Link to={`/new-campus`}>New Campus</Link>
             {/* map out campuses */}
             {props.campuses.map(campus => {
                 return (
@@ -25,6 +24,7 @@ function Campuses(props) {
     )
 }
 
+//Mapping state to props
 const mapState = function (state) {
     return {
         campuses: state.campuses
