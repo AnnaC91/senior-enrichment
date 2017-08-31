@@ -40,7 +40,7 @@ export default class Main extends Component {
                         <Route path='/campuses/:campusId' component={Campus} />
                         <Route exact path='/students' component={Students} />
                         <Route exact path='/new-student' component={NewStudent} />
-                        {/* <Route path='/students/:studentId/edit' component={EditStudent} /> */}
+                        <Route path='/students/:studentId/edit' component={EditStudent} />
                         <Route path='/students/:studentId' component={Student} />
                         <Route exact path='/' component={Home} />
                         <Route component={NotFound} />

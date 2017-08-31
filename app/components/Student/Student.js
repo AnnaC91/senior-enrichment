@@ -10,6 +10,7 @@ function Student(props){
             <h3>{props.student.name}</h3> 
             <p>{props.student.email}</p>
             <p>This student is a member of the <Link to={`/campuses/${props.campus.id}`}>{props.campus.name}</Link> campus.</p>
+            <Link to={`/students/${props.student.id}/edit`}>edit</Link>
         </div>
     )
 }

@@ -3,6 +3,7 @@ import axios from 'axios';
 //TYPES
 const GET_CAMPUSES = 'GET_CAMPUSES';
 const GET_CAMPUS = 'GET_CAMPUS';
+const UPDATE_CAMPUS = 'UPDATE_CAMPUS'
 
 //CREATORS
 export function getCampuses(campuses){
@@ -15,6 +16,13 @@ export function getCampuses(campuses){
 export function getCampus(campus){
     return {
         type: GET_CAMPUS,
+        campus: campus
+    }
+}
+
+export function updateCampus(campus){
+    return {
+        type: UPDATE_CAMPUS,
         campus: campus
     }
 }
@@ -50,7 +58,7 @@ export function editCampusDetails (campus, campusId, history) {
     return axios.put(`/api/campuses/${campusId}`, campus)
       .then(res => res.data)
       .then(newCampus => {
-        dispatch(getCampus(newCampus))
+        dispatch(updateCampus(newCampus))
         history.push(`/campuses/${newCampus.id}`)
       });
   };
@@ -63,6 +71,14 @@ export default function reducer(state = [], action){
             return action.campuses
         case GET_CAMPUS:
             return [...state, action.campus];
+        case UPDATE_CAMPUS:
+            return state.map(campus => {
+                if (campus.id === action.campus.id){
+                    return action.campus
+                } else {
+                    return campus
+                }
+            })
         default: 
             return state;
     }
