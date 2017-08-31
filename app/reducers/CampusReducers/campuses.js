@@ -32,13 +32,26 @@ export function fetchCampuses () {
   };
 }
 
-export function postCampus (campus) {
+export function postCampus (campus, history) {
 
   return function thunk (dispatch) {
     return axios.post('/api/campuses', campus)
       .then(res => res.data)
       .then(newCampus => {
         dispatch(getCampus(newCampus))
+        history.push(`/campuses/${newCampus.id}`)
+      });
+  };
+}
+
+export function editCampusDetails (campus, campusId, history) {
+
+  return function thunk (dispatch) {
+    return axios.put(`/api/campuses/${campusId}`, campus)
+      .then(res => res.data)
+      .then(newCampus => {
+        dispatch(getCampus(newCampus))
+        history.push(`/campuses/${newCampus.id}`)
       });
   };
 }

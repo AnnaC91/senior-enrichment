@@ -9,14 +9,14 @@ import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 // import reducers for individual components
-import campuses from './campuses';
-import students from './students';
+import campuses from './CampusReducers/campuses';
+import students from './StudentReducers/students';
+
 
 
 const reducer = combineReducers({
   campuses,
-  students
-
+  students,
 });
 
 const store = createStore(
@@ -29,5 +29,6 @@ const store = createStore(
 
 export default store;
 
-export * from './campuses';
-export * from './students';
+export * from './CampusReducers/campuses';
+export * from './StudentReducers/students';
+

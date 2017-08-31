@@ -4,6 +4,7 @@ import axios from 'axios';
 const GET_STUDENTS = 'GET_STUDENTS';
 const GET_STUDENT = 'GET_STUDENT';
 
+
 //CREATORS
 export function getStudents(students){
     return {
@@ -14,7 +15,7 @@ export function getStudents(students){
 
 export function getStudent(student){
     return {
-        type: GET_STUDENTS,
+        type: GET_STUDENT,
         student: student
     }
 }
@@ -33,13 +34,14 @@ export function fetchStudents () {
   };
 }
 
-export function postStudents (student) {
+export function postStudent (student, history) {
 
   return function thunk (dispatch) {
     return axios.post('/api/students', student)
       .then(res => res.data)
       .then(newStudent => {
         dispatch(getStudent(newStudent))
+        history.push(`/students/${newStudent.id}`)
       });
   };
 }

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 //Campus component
 function Campus(props){
-    console.log('campus props: ',props)
     return(
         <div>
             <h2>{props.campus.name}</h2> 
@@ -24,6 +23,7 @@ function Campus(props){
                     )
                 })}
             </ul>
+            <Link to={`/campuses/${props.campus.id}/edit`}>edit</Link>
         </div>
     )
 }
@@ -31,7 +31,6 @@ function Campus(props){
 //Mapping state to props
 const mapState = function (state, ownProps) {
     const campusId = ownProps.match.params.campusId
-    console.log('checking students access from campus :',state.students)
     return {
         campus: state.campuses.find(campus => campus.id=== +campusId) || {name: '', image: ''},
         students: state.students.filter(student => student.campusId=== +campusId) 
