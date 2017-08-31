@@ -23,7 +23,9 @@ function Campus(props){
                     )
                 })}
             </ul>
-            <Link to={`/campuses/${props.campus.id}/edit`}>edit</Link>
+            <button><Link to={`/campuses/${props.campus.id}/edit`}>edit</Link></button>
+            <button><Link to={`/campuses/${props.campus.id}/delete`}>delete</Link></button>
+            
         </div>
     )
 }
