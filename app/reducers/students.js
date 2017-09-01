@@ -4,7 +4,7 @@ import axios from 'axios';
 const GET_STUDENTS = 'GET_STUDENTS';
 const GET_STUDENT = 'GET_STUDENT';
 const UPDATE_STUDENT = 'UPDATE_STUDENT'
-
+const UPDATE_STUDENTS = 'UPDATE_STUDENTS'
 
 //CREATORS
 export function getStudents(students) {
@@ -25,6 +25,13 @@ export function updateStudent(student) {
     return {
         type: UPDATE_STUDENT,
         student: student
+    }
+}
+
+export function updateStudents(studentId) {
+    return {
+        type: UPDATE_STUDENTS,
+        studentId: studentId
     }
 }
 
@@ -81,12 +88,7 @@ export function deleteStudent(studentId, history) {
     return function thunk(dispatch) {
         return axios.delete(`/api/students/${studentId}`)
             .then(()=>{
-                return axios.get('/api/students')
-            })
-            .then(res=>res.data)
-            .then(students => {
-                const action = getStudents(students);
-                dispatch(action);
+                dispatch(updateStudents(studentId));
                 history.push('/students')
             })
     }
@@ -107,6 +109,8 @@ export default function reducer(state = [], action) {
                     return student
                 }
             })
+        case UPDATE_STUDENTS:
+            return state.filter(student => student.id !== +action.studentId)
         default:
             return state;
     }

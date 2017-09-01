@@ -4,6 +4,7 @@ import axios from 'axios';
 const GET_CAMPUSES = 'GET_CAMPUSES';
 const GET_CAMPUS = 'GET_CAMPUS';
 const UPDATE_CAMPUS = 'UPDATE_CAMPUS'
+const UPDATE_CAMPUSES = 'UPDATE_CAMPUSES'
 
 //CREATORS
 export function getCampuses(campuses){
@@ -24,6 +25,13 @@ export function updateCampus(campus){
     return {
         type: UPDATE_CAMPUS,
         campus: campus
+    }
+}
+
+export function updateCampuses(campusId){
+    return {
+        type: UPDATE_CAMPUSES,
+        campusId: campusId
     }
 }
 
@@ -68,14 +76,10 @@ export function deleteCampus(campusId, history) {
     return function thunk(dispatch) {
         return axios.delete(`/api/campuses/${campusId}`)
             .then(()=>{
-                return axios.get('/api/campuses')
-            })
-            .then(res=>res.data)
-            .then(campuses => {
-                const action = getCampuses(campuses);
-                dispatch(action);
+                dispatch(updateCampuses(campusId));
                 history.push('/campuses')
             })
+            
     }
 }
 
@@ -94,6 +98,8 @@ export default function reducer(state = [], action){
                     return campus
                 }
             })
+        case UPDATE_CAMPUSES:
+            return state.filter(campus => campus.id !== +action.campusId)
         default: 
             return state;
     }

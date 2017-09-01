@@ -2,8 +2,7 @@ const chance = require('chance')(1337);
 const Promise = require('bluebird');
 
 const db = require('./db/index');
-const Student = require('./db/models/student');
-const Campus = require('./db/models/campus')
+const { Student , Campus } = require('./db/models/index');
 
 //utility
 function utility(fn,n){ //takes a function and a number
@@ -28,6 +27,7 @@ function randomCampus(){
 
 function generateCampuses(){
     let campuses = utility(randomCampus,campusCount)
+    console.log('campuses',campuses)
     return campuses
 }
 
@@ -49,6 +49,7 @@ function randomStudent(createdCampuses){
 
 function generateStudents(){
     let students = utility(randomStudent, studentCount)
+    console.log('students',students)
     return students
 }
 
