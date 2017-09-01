@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { editCampusDetails, transferingStudentCampus } from '../../reducers';
+import { deleteStudent } from '../../reducers';
 
 function DeleteStudent(props){
     return(
@@ -23,11 +23,11 @@ const mapState = function (state, ownProps) {
     };
 }
 
-const mapDispatch = function (dispatch){
+const mapDispatch = function (dispatch, ownProps){
     return {
         delete(){
-            alert('attempted to delete student')
-            console.log()
+            const studentId = ownProps.match.params.studentId
+            dispatch(deleteStudent(studentId,ownProps.history))
         }
     }
 }

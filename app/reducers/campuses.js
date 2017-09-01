@@ -64,6 +64,21 @@ export function editCampusDetails (campus, campusId, history) {
   };
 }
 
+export function deleteCampus(campusId, history) {
+    return function thunk(dispatch) {
+        return axios.delete(`/api/campuses/${campusId}`)
+            .then(()=>{
+                return axios.get('/api/campuses')
+            })
+            .then(res=>res.data)
+            .then(campuses => {
+                const action = getCampuses(campuses);
+                dispatch(action);
+                history.push('/campuses')
+            })
+    }
+}
+
 //REDUCER
 export default function reducer(state = [], action){
     switch(action.type){

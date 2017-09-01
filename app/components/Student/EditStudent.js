@@ -88,7 +88,7 @@ const mapDispatch = function (dispatch, ownProps) {
             dispatch(editStudentDetails(newStudentDetails, ownProps.match.params.studentId, ownProps.history))
         },
 
-        // to change student's email
+        // to change student's campus
         submitNewStudentCampus(event) {
             event.preventDefault();
             const newStudentDetails = {

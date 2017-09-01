@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { editCampusDetails, transferingStudentCampus } from '../../reducers';
+import { deleteCampus } from '../../reducers';
 
 function DeleteCampus(props) {
     console.log('checking delete page\'s student count :',props.students.length, 'student array :', props.students)
@@ -11,9 +11,10 @@ function DeleteCampus(props) {
             {/* TERNARY TO NOT ALLOW DELETION IF THERE ARE STILL STUDENTS AT THIS CAMPUS */}
             {(props.students.length>0) ? <div>
                 <p>There are still students enrolled here. Please transfer them out or expell them first!</p>
+                <button><Link to={`/campuses/${props.campus.id}`}>Back</Link></button>
             </div>
             : <div>
-                <p> Are you sure you want to close down {props.campus.name}? </p>
+                <p> Are you sure you want to demolish {props.campus.name}? </p>
                 <div >
                     <button onClick={props.delete}>Yes</button>
                     <button><Link to={`/campuses/${props.campus.id}`}>No</Link></button>
@@ -31,10 +32,11 @@ const mapState = function (state, ownProps) {
     }
 }
 
-const mapDispatch = function (dispatch) {
+const mapDispatch = function (dispatch,ownProps) {
     return {
         delete() {
-            alert('attempted to delete campus')
+            const campusId = ownProps.match.params.campusId
+            dispatch(deleteCampus(campusId,ownProps.history))
         }
     }
 }
