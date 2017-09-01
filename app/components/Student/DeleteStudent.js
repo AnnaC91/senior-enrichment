@@ -27,6 +27,7 @@ const mapDispatch = function (dispatch){
     return {
         delete(){
             alert('attempted to delete student')
+            console.log()
         }
     }
 }

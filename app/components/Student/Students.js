@@ -7,7 +7,6 @@ import { withRouter } from 'react-router'; //^*
 
 //All students component
 function Students (props){
-    console.log('student props :',props.students)
     return(
         <div>
             <Link to={`/new-student`}>New Student</Link>
