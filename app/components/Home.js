@@ -9,7 +9,7 @@ import { withRouter } from 'react-router'; //^*
 export default function Home (){
     return(
         <div>
-            <h1>Home Page</h1>
+            <h1>Welcome to Margaret Hamilton Interplanetary Academy of JavaScript</h1>
             <img src='http://i0.kym-cdn.com/entries/icons/original/000/019/119/xZjfF2z.jpg'/>
         </div>
     )
